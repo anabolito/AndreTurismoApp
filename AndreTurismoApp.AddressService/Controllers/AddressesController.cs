@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using AndreTurismoApp.AddressService.Data;
 using AndreTurismoApp.Models;
 
+using AndreTurismoApp.AddressService.Services;
+
 namespace AndreTurismoApp.AddressService.Controllers
 {
     [Route("api/[controller]")]
@@ -53,7 +55,7 @@ namespace AndreTurismoApp.AddressService.Controllers
         // PUT: api/Addresses/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAddress(int id, Address address)
+        public async Task<ActionResult<Address>> PutAddress(int id, Address address)
         {
             if (id != address.Id)
             {
@@ -78,18 +80,31 @@ namespace AndreTurismoApp.AddressService.Controllers
                 }
             }
 
-            return NoContent();
+            return address;
         }
 
         // POST: api/Addresses
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Address>> PostAddress(Address address)
+        [HttpPost("cep")]
+        public async Task<ActionResult<Address>> PostAddress(string cep)
         {
           if (_context.Address == null)
           {
               return Problem("Entity set 'AndreTurismoAppAddressServiceContext.Address'  is null.");
           }
+            var aux = PostOfficeService.GetAddress(cep).Result;
+            Address address = new()
+            {
+                Street = aux.Street,
+                Number = aux.Number,
+                Neighborhood = aux.Neighborhood,
+                PostalCode = aux.PostalCode,
+                City = new City()
+                {
+                    CityName = aux.City
+                }
+            };
+
             _context.Address.Add(address);
             await _context.SaveChangesAsync();
 
@@ -119,6 +134,13 @@ namespace AndreTurismoApp.AddressService.Controllers
         private bool AddressExists(int id)
         {
             return (_context.Address?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        [HttpGet("{cep:length(8)}")]
+        public ActionResult<AddressDTO> GetPostOffices(string cep)
+        {
+            //Exemplo de chamada de serviço - TESTE
+            return PostOfficeService.GetAddress(cep).Result;
         }
     }
 }

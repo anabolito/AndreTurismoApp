@@ -22,14 +22,14 @@ namespace AndreTurismoApp.Services
             return addressRepository.Insert(address);
         }
 
-        public bool Delete(Address address)
+        public bool Delete(int id)
         {
-            return addressRepository.Delete(address);
+            return addressRepository.Delete(id);
         }
 
-        public bool Update(Address address, int id)
+        public bool Update(Address address)
         {
-            return addressRepository.Update(address, id);
+            return addressRepository.Update(address);
         }
 
         public List<Address> GetAll()

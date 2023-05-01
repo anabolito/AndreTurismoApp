@@ -31,25 +31,31 @@ namespace AndreTurismoApp.Repositories
             return status;
         }
 
-        public bool Delete(Address address)
+        public bool Delete(int id)
         {
             var status = false;
             using (var db = new SqlConnection(Conn))
             {
-                db.Execute(Address.DELETE, address);
+               
+                db.Open();
+                var result = db.Execute(Address.DELETE, new { @Id = id });
                 status = true;
+                db.Close();
 
             }
             return status;
         }
 
-        public bool Update(Address address, int id)
+        
+        public bool Update(Address address)
         {
             var status = false;
             using (var db = new SqlConnection(Conn))
             {
-                db.Execute(Address.UPDATE, new { @Id = id , @Street = address.Street, @Number = address.Number, @Neighborhood = address.Neighborhood, @PostalCode = address.PostalCode, @IdCity = address.City.Id });
+                db.Open();
+                db.ExecuteScalar(Address.UPDATE, new { @Street = address.Street, @Number = address.Number, @Neighborhood = address.Neighborhood, @PostalCode = address.PostalCode, @IdCity = address.City.Id });
                 status = true;
+                db.Close();
             }
             return status;
         }
@@ -58,7 +64,11 @@ namespace AndreTurismoApp.Repositories
         {
             using (var db = new SqlConnection(Conn))
             {
-                var addresses = db.Query<Address>(Address.GETALL);
+                var addresses = db.Query<Address, City, Address>(Address.GETALL, (address, city) =>
+                {
+                    address.City = city;
+                    return address;
+                }, splitOn: "SplitIdCity");
                 return (List<Address>)addresses;
             }
         }

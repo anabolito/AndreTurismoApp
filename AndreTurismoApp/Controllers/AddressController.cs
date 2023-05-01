@@ -10,51 +10,43 @@ namespace AndreTurismoApp.Controllers
     public class AddressController : ControllerBase
     {
         private AddressService addressService;
-        private CityService cityService;
 
-
+        private readonly PostOfficeService _postOffice;
         public AddressController()
         {
             addressService = new AddressService();
-            cityService = new CityService();
         }
 
-        [HttpPost("{cep}")]
+        [HttpPost("cep")]
         public bool Insert(string cep)
         {
-            var dto = PostOfficeService.GetAddress(cep).Result;
+            var aux = PostOfficeService.GetAddress(cep).Result;
             Address address = new()
             {
-                Street = dto.Street,
-                Number = dto.Number,
-                Neighborhood = dto.Neighborhood,
-                PostalCode = dto.PostalCode,
-                City = new()
+                Street = aux.Street,
+                Number = aux.Number,
+                Neighborhood = aux.Neighborhood,
+                PostalCode = aux.PostalCode,
+                City = new City()
                 {
-                    CityName = dto.City
+                    CityName = aux.City
                 }
-
             };
-            /*City city = new();
-            if (address.City.Id != 0)
-                city = cityService.GetById(address.City.Id);
-            else
-                city = cityService.Insert(address.City);
-            address.City = city;*/
-
             return addressService.Insert(address);
         }
 
-        [HttpDelete]
-        public bool Delete(Address address)
+        [HttpDelete("{id}")]
+        public bool Delete(int id)
         {
-            return addressService.Delete(address);
+            //Address address = new();
+            //address.Id = id;
+            return addressService.Delete(id);
         }
 
         [HttpPut]
-        public bool Update(Address address, int id)
+        public bool Update(Address address)
         {
-            return addressService.Update(address, id);
+            return addressService.Update(address);
         }
 
         [HttpGet]

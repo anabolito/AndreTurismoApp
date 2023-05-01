@@ -6,8 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AndreTurismoApp.Services
-{  // DENTRO DA APLICAÇÃO, CONSULTA O MICROSSERVIÇO
+namespace AndreTurismoApp.AddressService.Services
+{ // DENTRO DO MICROSSERVIÇO
     public class PostOfficeService
     {
         static readonly HttpClient endereco = new HttpClient();
@@ -15,7 +15,7 @@ namespace AndreTurismoApp.Services
         {
             try
             {
-                HttpResponseMessage response = await PostOfficeService.endereco.GetAsync("https://localhost:7060/api/Addresses");
+                HttpResponseMessage response = await PostOfficeService.endereco.GetAsync("https://viacep.com.br/ws/" + cep + "/json/");
                 response.EnsureSuccessStatusCode();
                 string ender = await response.Content.ReadAsStringAsync();
                 var end = JsonConvert.DeserializeObject<AddressDTO>(ender);

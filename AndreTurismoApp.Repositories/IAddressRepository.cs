@@ -10,8 +10,8 @@ namespace AndreTurismoApp.Repositories
     public interface IAddressRepository
     {
         bool Insert(Address address);
-        bool Delete(Address address);
-        bool Update(Address address, int id);
+        bool Delete(int id);
+        bool Update(Address address);
         List<Address> GetAll();
     }
 }
