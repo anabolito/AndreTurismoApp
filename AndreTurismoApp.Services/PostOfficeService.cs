@@ -1,10 +1,5 @@
 ﻿using AndreTurismoApp.Models;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.Json;
 
 namespace AndreTurismoApp.Services
 {  // DENTRO DA APLICAÇÃO, CONSULTA O MICROSSERVIÇO
@@ -19,7 +14,7 @@ namespace AndreTurismoApp.Services
                 HttpResponseMessage response = await PostOfficeService.endereco.GetAsync("https://localhost:7060/api/Addresses/" + cep);
                 response.EnsureSuccessStatusCode();
                 string ender = await response.Content.ReadAsStringAsync();
-                var end = JsonConvert.DeserializeObject<AddressDTO>(ender);
+                var end = JsonSerializer.Deserialize<AddressDTO>(ender);
                 return end;
             }
             catch (HttpRequestException e)

@@ -33,7 +33,7 @@ namespace AndreTurismoApp.Models
 
 
         [JsonPropertyName("gia")]
-        public int Number { get; set; }
+        public string Number { get; set; }
 
 
         [JsonPropertyName("complemento")]

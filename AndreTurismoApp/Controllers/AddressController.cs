@@ -24,7 +24,7 @@ namespace AndreTurismoApp.Controllers
             Address address = new()
             {
                 Street = aux.Street,
-                Number = aux.Number,
+                Number = int.Parse(aux.Number),
                 Neighborhood = aux.Neighborhood,
                 PostalCode = aux.PostalCode,
                 City = new City()
