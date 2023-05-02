@@ -1,9 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text.Json.Serialization;
 
 namespace AndreTurismoApp.Models
 {
@@ -13,35 +8,35 @@ namespace AndreTurismoApp.Models
         public int Id { get; set; }
 
 
-        [JsonProperty("pais")]
+        [JsonPropertyName("pais")]
         public string? Country { get; set; }
 
 
-        [JsonProperty("cep")]
+        [JsonPropertyName("cep")]
         public string PostalCode { get; set; }
 
 
-        [JsonProperty("bairro")]
+        [JsonPropertyName("bairro")]
         public string Neighborhood { get; set; }
 
 
-        [JsonProperty("localidade")]
+        [JsonPropertyName("localidade")]
         public string City { get; set; }
 
 
-        [JsonProperty("uf")]
+        [JsonPropertyName("uf")]
         public string State { get; set; }
 
 
-        [JsonProperty("logradouro")]
+        [JsonPropertyName("logradouro")]
         public string Street { get; set; }
 
 
-        [JsonProperty("gia")]
+        [JsonPropertyName("gia")]
         public int Number { get; set; }
 
 
-        [JsonProperty("complemento")]
+        [JsonPropertyName("complemento")]
         public string Complety { get; set; }
         #endregion
     }

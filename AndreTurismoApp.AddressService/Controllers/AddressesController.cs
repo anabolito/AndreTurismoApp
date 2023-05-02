@@ -99,6 +99,7 @@ namespace AndreTurismoApp.AddressService.Controllers
                 Number = aux.Number,
                 Neighborhood = aux.Neighborhood,
                 PostalCode = aux.PostalCode,
+                RegisterDate = DateTime.Now,
                 City = new City()
                 {
                     CityName = aux.City
@@ -137,10 +138,10 @@ namespace AndreTurismoApp.AddressService.Controllers
         }
 
         [HttpGet("{cep:length(8)}")]
-        public ActionResult<AddressDTO> GetPostOffices(string cep)
+        public async Task<ActionResult<AddressDTO>> GetPostOffices(string cep)
         {
             //Exemplo de chamada de serviço - TESTE
-            return PostOfficeService.GetAddress(cep).Result;
+            return await PostOfficeService.GetAddress(cep);
         }
     }
 }

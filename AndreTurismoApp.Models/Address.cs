@@ -7,7 +7,7 @@
                         "values (@Street, @Number, @Neighborhood, @PostalCode, @IdCity);" + "select cast(scope_identity() as int)";
         //public readonly static string GETALL = "select * from Address ad, City c where ad.IdCity = c.Id";
         //public readonly static string GETALL = "select ad.*,c.CityName from Address ad, City c where ad.IdCity = c.Id";
-        public readonly static string GETALL = "select Id, Street,Number, Neighborhood, PostalCode, DataRegister, IdCity as SplitIdCity, IdCity, Id, CityName from Address ad JOIN City c ON ad.IdCity = c.Id";
+        public readonly static string GETALL = "select ad.Id, ad.Street,ad.Number, ad.Neighborhood, ad.PostalCode, ad.RegisterDate, ad.IdCity as SplitIdCity, ad.IdCity, c.Id, c.CityName from Address ad JOIN City c ON ad.IdCity = c.Id";
         public readonly static string GETBYID = "select ad.Id, ad.Street, ad.Number, ad.Neighborhood, ad.PostalCode, ad.RegisterDate, c.Id, c.CityName from Address ad join City c on ad.IdCity = c.Id where ad.Id = @Id";
         public readonly static string DELETE = "delete from Address where Id = @Id";
         public readonly static string UPDATE = "update Address set Street = @Street, Number = @Number , Neighborhood = @Neighborhood, PostalCode = @PostalCode, IdCity = @IdCity where Id = @Id";

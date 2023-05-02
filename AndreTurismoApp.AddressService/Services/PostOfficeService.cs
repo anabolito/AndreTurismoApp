@@ -19,6 +19,7 @@ namespace AndreTurismoApp.AddressService.Services
                 response.EnsureSuccessStatusCode();
                 string ender = await response.Content.ReadAsStringAsync();
                 var end = JsonConvert.DeserializeObject<AddressDTO>(ender);
+                JsonSerializer.Deser Deserialize<AddressDTO>();
                 return end;
             }
             catch (HttpRequestException e)
