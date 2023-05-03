@@ -13,6 +13,6 @@ namespace AndreTurismoApp.Models
         public string Name { get; set; }
         public string Phone { get; set; }
         public Address Address { get; set; }
-        public DateTime RegisterDate { get; set; }
+        public DateTime? RegisterDate { get; set; }
     }
 }

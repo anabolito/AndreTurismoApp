@@ -15,8 +15,8 @@
 
         public int Id { get; set; }
         public string Street { get; set; }
-        public int Number { get; set; }
-        public string Neighborhood { get; set; }
+        public int? Number { get; set; }
+        public string? Neighborhood { get; set; }
         public string PostalCode { get; set; }
         public DateTime? RegisterDate { get; set; }
         public City City { get; set; }

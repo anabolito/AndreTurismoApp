@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AndreTurismoApp.HotelService.Data;
 using AndreTurismoApp.Models;
+using AndreTurismoApp.HotelService.Services;
 
 namespace AndreTurismoApp.HotelService.Controllers
 {
@@ -53,7 +54,7 @@ namespace AndreTurismoApp.HotelService.Controllers
         // PUT: api/Hotels/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutHotel(int id, Hotel hotel)
+        public async Task<ActionResult<Hotel>> PutHotel(int id, Hotel hotel)
         {
             if (id != hotel.Id)
             {
@@ -78,7 +79,7 @@ namespace AndreTurismoApp.HotelService.Controllers
                 }
             }
 
-            return NoContent();
+            return hotel;
         }
 
         // POST: api/Hotels
@@ -90,6 +91,20 @@ namespace AndreTurismoApp.HotelService.Controllers
           {
               return Problem("Entity set 'AndreTurismoAppHotelServiceContext.Hotel'  is null.");
           }
+            var dto = HotelAddressService.GetAddress(hotel.HotelAddress.PostalCode).Result;
+            Address address = new()
+            {
+                Street = dto.Street,
+                Number = int.Parse(dto.Number),
+                Neighborhood = dto.Neighborhood,
+                PostalCode = dto.PostalCode,
+                RegisterDate = DateTime.Now,
+                City = new()
+                {
+                    CityName = dto.City
+                }
+            };
+            hotel.HotelAddress = address;
             _context.Hotel.Add(hotel);
             await _context.SaveChangesAsync();
 
@@ -98,7 +113,7 @@ namespace AndreTurismoApp.HotelService.Controllers
 
         // DELETE: api/Hotels/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteHotel(int id)
+        public async Task<ActionResult<Hotel>> DeleteHotel(int id)
         {
             if (_context.Hotel == null)
             {
