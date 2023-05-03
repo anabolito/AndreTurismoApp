@@ -54,7 +54,7 @@ namespace AndreTurismoApp.AirfareService.Controllers
         // PUT: api/Airfares/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAirfare(int id, Airfare airfare)
+        public async Task<ActionResult<Airfare>> PutAirfare(int id, Airfare airfare)
         {
             if (id != airfare.Id)
             {
@@ -79,7 +79,7 @@ namespace AndreTurismoApp.AirfareService.Controllers
                 }
             }
 
-            return NoContent();
+            return airfare;
         }
 
         // POST: api/Airfares
@@ -104,21 +104,46 @@ namespace AndreTurismoApp.AirfareService.Controllers
                     CityName = dto.City
                 }
             };
+            var dto2 = AirfareAddressService.GetAddress(airfare.Origin.PostalCode).Result;
+
             Address destiny = new()
             {
-                Street = dto.Street,
-                Number = int.Parse(dto.Number),
-                Neighborhood = dto.Neighborhood,
-                PostalCode = dto.PostalCode,
+                Street = dto2.Street,
+                Number = int.Parse(dto2.Number),
+                Neighborhood = dto2.Neighborhood,
+                PostalCode = dto2.PostalCode,
                 RegisterDate = DateTime.Now,
                 City = new()
                 {
-                    CityName = dto.City
+                    CityName = dto2.City
                 }
             };
+            var c = AirfareCustomerService.GetClient(airfare.Client.Id).Result;
+            Client customer = new Client()
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Phone = c.Phone,
+                Address = new Address()
+                {
+                    Id = c.Address.Id,
+                    Street = c.Address.Street,
+                    Number = c.Address.Number,
+                    Neighborhood = c.Address.Neighborhood,
+                    PostalCode = c.Address.PostalCode,
+                    City = new City()
+                    {
+                        Id = c.Address.City.Id,
+                        CityName = c.Address.City.CityName
+                    }
+                }
+            };
+
             airfare.Origin = origin;
             airfare.Destiny = destiny;
+            airfare.Client = customer;
             _context.Airfare.Add(airfare);
+
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetAirfare", new { id = airfare.Id }, airfare);
@@ -126,7 +151,7 @@ namespace AndreTurismoApp.AirfareService.Controllers
 
         // DELETE: api/Airfares/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAirfare(int id)
+        public async Task<ActionResult<Airfare>> DeleteAirfare(int id)
         {
             if (_context.Airfare == null)
             {

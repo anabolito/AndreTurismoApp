@@ -62,7 +62,7 @@ namespace AndreTurismoApp.UTest
             {
                 Id = 4,
                 HotelName = "hotelNana",
-                DailyPrice = 500, 
+                DailyPrice = 500,
                 HotelAddress = new()
                 {
                     Id = 3,
@@ -71,14 +71,14 @@ namespace AndreTurismoApp.UTest
                     PostalCode = "14820428",
                     City = new() { Id = 10, CityName = "City 10" }
                 }
-               
+
             };
             // Use a clean instance of the context to run the test
             using (var context = new AndreTurismoAppHotelServiceContext(options))
             {
                 HotelsController hotelController = new HotelsController(context);
                 Hotel h = hotelController.PostHotel(hotel).Result.Value;
-                Assert.Equal("hotelNana", h.HotelName);
+                Assert.Equal(4, h.Id);
             }
         }
         [Fact]
@@ -90,18 +90,18 @@ namespace AndreTurismoApp.UTest
                 Id = 1,
                 HotelName = "hotel 1111",
                 DailyPrice = 1000,
-                HotelAddress = new() 
-                { 
-                    Id = 1, 
-                    Street = "rua1", 
-                    Number = 1, 
-                    Neighborhood = "bairro1", 
-                    PostalCode = "14820428", 
-                    City = new() 
-                    { 
-                        Id = 1, 
-                        CityName = "City1" 
-                    } 
+                HotelAddress = new()
+                {
+                    Id = 1,
+                    Street = "rua1",
+                    Number = 1,
+                    Neighborhood = "bairro1",
+                    PostalCode = "14820428",
+                    City = new()
+                    {
+                        Id = 1,
+                        CityName = "City1"
+                    }
                 }
             };
             // Use a clean instance of the context to run the test

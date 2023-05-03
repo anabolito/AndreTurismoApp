@@ -37,10 +37,10 @@ namespace AndreTurismoApp.HotelService.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Hotel>> GetHotel(int id)
         {
-          if (_context.Hotel == null)
-          {
-              return NotFound();
-          }
+            if (_context.Hotel == null)
+            {
+                return NotFound();
+            }
             var hotel = await _context.Hotel.FindAsync(id);
 
             if (hotel == null)
@@ -86,10 +86,10 @@ namespace AndreTurismoApp.HotelService.Controllers
         [HttpPost]
         public async Task<ActionResult<Hotel>> PostHotel(Hotel hotel)
         {
-          if (_context.Hotel == null)
-          {
-              return Problem("Entity set 'AndreTurismoAppHotelServiceContext.Hotel'  is null.");
-          }
+            if (_context.Hotel == null)
+            {
+                return Problem("Entity set 'AndreTurismoAppHotelServiceContext.Hotel'  is null.");
+            }
             var dto = HotelAddressService.GetAddress(hotel.HotelAddress.PostalCode).Result;
             Address address = new()
             {

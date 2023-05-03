@@ -18,13 +18,11 @@ namespace AndreTurismoApp.AddressService.Controllers
     public class AddressesController : ControllerBase
     {
         private readonly AndreTurismoAppAddressServiceContext _context;
-        private readonly AndreTurismoAppCityServiceContext _context2;
 
 
-        public AddressesController(AndreTurismoAppAddressServiceContext context, AndreTurismoAppCityServiceContext context2)
+        public AddressesController(AndreTurismoAppAddressServiceContext context)
         {
             _context = context;
-            _context2 = context2;
         }
 
         // GET: api/Addresses
