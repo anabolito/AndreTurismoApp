@@ -26,10 +26,10 @@ namespace AndreTurismoApp.HotelService.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Hotel>>> GetHotel()
         {
-          if (_context.Hotel == null)
-          {
-              return NotFound();
-          }
+            if (_context.Hotel == null)
+            {
+                return NotFound();
+            }
             return await _context.Hotel.ToListAsync();
         }
 
@@ -78,7 +78,6 @@ namespace AndreTurismoApp.HotelService.Controllers
                     throw;
                 }
             }
-
             return hotel;
         }
 
@@ -108,7 +107,7 @@ namespace AndreTurismoApp.HotelService.Controllers
             _context.Hotel.Add(hotel);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetHotel", new { id = hotel.Id }, hotel);
+            return hotel;
         }
 
         // DELETE: api/Hotels/5

@@ -58,7 +58,11 @@ namespace AndreTurismoApp.UTest
                 Street = "Rua 10",
                 Neighborhood = "centro",
                 PostalCode = "14804300",
-                City = new() { Id = 10, CityName = "City 10" }
+                City = new() 
+                { 
+                    Id = 10, 
+                    CityName = "City 10" 
+                }
             };
             // Use a clean instance of the context to run the test
             using (var context = new AndreTurismoAppAddressServiceContext(options))

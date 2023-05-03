@@ -9,6 +9,7 @@ using AndreTurismoApp.AddressService.Data;
 using AndreTurismoApp.Models;
 
 using AndreTurismoApp.AddressService.Services;
+using AndreTurismoApp.CityService.Data;
 
 namespace AndreTurismoApp.AddressService.Controllers
 {
@@ -17,10 +18,13 @@ namespace AndreTurismoApp.AddressService.Controllers
     public class AddressesController : ControllerBase
     {
         private readonly AndreTurismoAppAddressServiceContext _context;
+        private readonly AndreTurismoAppCityServiceContext _context2;
 
-        public AddressesController(AndreTurismoAppAddressServiceContext context)
+
+        public AddressesController(AndreTurismoAppAddressServiceContext context, AndreTurismoAppCityServiceContext context2)
         {
             _context = context;
+            _context2 = context2;
         }
 
         // GET: api/Addresses

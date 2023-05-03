@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AndreTurismoApp.AirfareService.Data;
 using AndreTurismoApp.Models;
+using AndreTurismoApp.AirfareService.Services;
 
 namespace AndreTurismoApp.AirfareService.Controllers
 {
@@ -90,6 +91,33 @@ namespace AndreTurismoApp.AirfareService.Controllers
           {
               return Problem("Entity set 'AndreTurismoAppAirfareServiceContext.Airfare'  is null.");
           }
+            var dto = AirfareAddressService.GetAddress(airfare.Origin.PostalCode).Result;
+            Address origin = new()
+            {
+                Street = dto.Street,
+                Number = int.Parse(dto.Number),
+                Neighborhood = dto.Neighborhood,
+                PostalCode = dto.PostalCode,
+                RegisterDate = DateTime.Now,
+                City = new()
+                {
+                    CityName = dto.City
+                }
+            };
+            Address destiny = new()
+            {
+                Street = dto.Street,
+                Number = int.Parse(dto.Number),
+                Neighborhood = dto.Neighborhood,
+                PostalCode = dto.PostalCode,
+                RegisterDate = DateTime.Now,
+                City = new()
+                {
+                    CityName = dto.City
+                }
+            };
+            airfare.Origin = origin;
+            airfare.Destiny = destiny;
             _context.Airfare.Add(airfare);
             await _context.SaveChangesAsync();
 
