@@ -61,7 +61,8 @@ namespace AndreTurismoApp.UTest
                 City = new() 
                 { 
                     Id = 10, 
-                    CityName = "City 10" 
+                    CityName = "City 10" ,
+                    
                 }
             };
             // Use a clean instance of the context to run the test

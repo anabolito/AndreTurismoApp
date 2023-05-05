@@ -1,4 +1,3 @@
-﻿using AndreTurismoApp.AirfareService.Data;
 using AndreTurismoApp.Models;
 using System.Text.Json;
 
