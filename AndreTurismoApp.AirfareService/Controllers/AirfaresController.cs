@@ -26,10 +26,10 @@ namespace AndreTurismoApp.AirfareService.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Airfare>>> GetAirfare()
         {
-          if (_context.Airfare == null)
-          {
-              return NotFound();
-          }
+            if (_context.Airfare == null)
+            {
+                return NotFound();
+            }
             return await _context.Airfare.ToListAsync();
         }
 
@@ -37,10 +37,10 @@ namespace AndreTurismoApp.AirfareService.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Airfare>> GetAirfare(int id)
         {
-          if (_context.Airfare == null)
-          {
-              return NotFound();
-          }
+            if (_context.Airfare == null)
+            {
+                return NotFound();
+            }
             var airfare = await _context.Airfare.FindAsync(id);
 
             if (airfare == null)
@@ -87,10 +87,10 @@ namespace AndreTurismoApp.AirfareService.Controllers
         [HttpPost]
         public async Task<ActionResult<Airfare>> PostAirfare(Airfare airfare)
         {
-          if (_context.Airfare == null)
-          {
-              return Problem("Entity set 'AndreTurismoAppAirfareServiceContext.Airfare'  is null.");
-          }
+            if (_context.Airfare == null)
+            {
+                return Problem("Entity set 'AndreTurismoAppAirfareServiceContext.Airfare'  is null.");
+            }
             var dto = AirfareAddressService.GetAddress(airfare.Origin.PostalCode).Result;
             Address origin = new()
             {
@@ -119,34 +119,43 @@ namespace AndreTurismoApp.AirfareService.Controllers
                 }
             };
             var c = AirfareCustomerService.GetClient(airfare.Client.Id).Result;
-            Client customer = new Client()
+            Client customer;
+            if (c.Id != 0)
             {
-                Id = c.Id,
-                Name = c.Name,
-                Phone = c.Phone,
-                Address = new Address()
+                customer = new Client()
                 {
-                    Id = c.Address.Id,
-                    Street = c.Address.Street,
-                    Number = c.Address.Number,
-                    Neighborhood = c.Address.Neighborhood,
-                    PostalCode = c.Address.PostalCode,
-                    City = new City()
+                    Id = c.Id,
+                    Name = c.Name,
+                    Phone = c.Phone,
+                    Address = new Address()
                     {
-                        Id = c.Address.City.Id,
-                        CityName = c.Address.City.CityName
+                        Id = c.Address.Id,
+                        Street = c.Address.Street,
+                        Number = c.Address.Number,
+                        Neighborhood = c.Address.Neighborhood,
+                        PostalCode = c.Address.PostalCode,
+                        City = new City()
+                        {
+                            Id = c.Address.City.Id,
+                            CityName = c.Address.City.CityName
+                        }
                     }
-                }
-            };
+                };
+            }
+            else
+            {
+                customer = airfare.Client;
+            }
+           
 
             airfare.Origin = origin;
             airfare.Destiny = destiny;
             airfare.Client = customer;
-            _context.Airfare.Add(airfare);
 
+            _context.Airfare.Add(airfare);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAirfare", new { id = airfare.Id }, airfare);
+            return airfare;
         }
 
         // DELETE: api/Airfares/5

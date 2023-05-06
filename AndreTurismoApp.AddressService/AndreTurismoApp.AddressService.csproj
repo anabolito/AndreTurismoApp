@@ -13,13 +13,12 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.13" />
+    <PackageReference Include="RabbitMQ.Client" Version="6.5.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AndreTurismoApp.CityService\AndreTurismoApp.CityService.csproj" />
     <ProjectReference Include="..\AndreTurismoApp.Models\AndreTurismoApp.Models.csproj" />
-    <ProjectReference Include="..\AndreTurismoApp.Services\AndreTurismoApp.Services.csproj" />
   </ItemGroup>
 
 </Project>

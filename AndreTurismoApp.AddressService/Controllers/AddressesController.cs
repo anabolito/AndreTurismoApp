@@ -9,7 +9,10 @@ using AndreTurismoApp.AddressService.Data;
 using AndreTurismoApp.Models;
 
 using AndreTurismoApp.AddressService.Services;
-using AndreTurismoApp.CityService.Data;
+using Newtonsoft.Json;
+using System.Text;
+using Microsoft.AspNetCore.Connections;
+using RabbitMQ.Client;
 
 namespace AndreTurismoApp.AddressService.Controllers
 {
@@ -111,6 +114,39 @@ namespace AndreTurismoApp.AddressService.Controllers
             await _context.SaveChangesAsync();
 
             //return CreatedAtAction("GetAddress", new { id = address.Id }, address);
+            return address;
+        }
+       
+        private readonly ConnectionFactory _factory;
+        private const string QUEUE_NAME = "message";
+
+        [HttpPost]
+        public async Task<ActionResult<Address>> PostRM(Address address)
+        {
+            using (var connection = _factory.CreateConnection())
+            {
+                using (var channel = connection.CreateModel())
+                {
+
+                    channel.QueueDeclare(
+                        queue: QUEUE_NAME,
+                        durable: false,
+                        exclusive: false,
+                        autoDelete: false,
+                        arguments: null
+                        );
+
+                    var stringfieldMessage = JsonConvert.SerializeObject(address);
+                    var bytesMessage = Encoding.UTF8.GetBytes(stringfieldMessage);
+
+                    channel.BasicPublish(
+                        exchange: "",
+                        routingKey: QUEUE_NAME,
+                        basicProperties: null,
+                        body: bytesMessage
+                        );
+                }
+            }
             return address;
         }
 

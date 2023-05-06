@@ -30,8 +30,8 @@ namespace AndreTurismoApp.UTest
             // Use a clean instance of the context to run the test
             using (var context = new AndreTurismoAppAddressServiceContext(options))
             {
-                AddressesController clientController = new AddressesController(context);
-                IEnumerable<Address> clients = clientController.GetAddress().Result.Value;
+                AddressesController addressController = new AddressesController(context);
+                IEnumerable<Address> clients = addressController.GetAddress().Result.Value;
                 Assert.Equal(3, clients.Count());
             }
         }
@@ -42,10 +42,10 @@ namespace AndreTurismoApp.UTest
             // Use a clean instance of the context to run the test
             using (var context = new AndreTurismoAppAddressServiceContext(options))
             {
-                int clientId = 2;
-                AddressesController clientController = new AddressesController(context);
-                Address client = clientController.GetAddress(clientId).Result.Value;
-                Assert.Equal(2, client.Id);
+                int addressId = 2;
+                AddressesController addressController = new AddressesController(context);
+                Address address = addressController.GetAddress(addressId).Result.Value;
+                Assert.Equal(2, address.Id);
             }
         }
         [Fact]
@@ -56,12 +56,11 @@ namespace AndreTurismoApp.UTest
             {
                 Id = 4,
                 Street = "Rua 10",
-                Neighborhood = "centro",
                 PostalCode = "14804300",
                 City = new() 
                 { 
                     Id = 10, 
-                    CityName = "City 10" ,
+                    CityName = "City 10" 
                     
                 }
             };

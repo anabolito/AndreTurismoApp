@@ -1,7 +1,5 @@
 ﻿using AndreTurismoApp.AirfareService.Controllers;
 using AndreTurismoApp.AirfareService.Data;
-using AndreTurismoApp.HotelService.Controllers;
-using AndreTurismoApp.HotelService.Data;
 using AndreTurismoApp.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -31,24 +29,24 @@ namespace AndreTurismoApp.UTest
                     Id = 1,
                     Price = 1200,
                     Client = new Client() { Id = 1, Name = "nana", Phone = "999", Address = new Address() { Id = 1, Street = "rua1", Number = 1, Neighborhood = "bairro1", PostalCode = "14820428", City = new City() { Id = 1, CityName = "City1" } } },
-                    Origin = new Address() { Id = 1, Street = "Street 1", PostalCode = "123456789", City = new City() { Id = 1, CityName = "City1" } },
-                    Destiny = new Address() { Id = 2, Street = "Street 1", PostalCode = "123456789", City = new City() { Id = 1, CityName = "City1" }, }
+                    Origin = new Address() { Id = 2, Street = "Street 1", PostalCode = "123456789", City = new City() { Id = 2, CityName = "City1" } },
+                    Destiny = new Address() { Id = 3, Street = "Street 1", PostalCode = "123456789", City = new City() { Id = 3, CityName = "City1" }, }
                 });
                 context.Airfare.Add(new Airfare
                 {
                     Id = 2,
                     Price = 1300,
-                    Client = new Client() { Id = 2, Name = "nana", Phone = "999", Address = new Address() { Id = 2, Street = "rua2", Number = 2, Neighborhood = "bairro2", PostalCode = "14820428", City = new City() { Id = 2, CityName = "City2" } } },
-                    Origin = new Address() { Id = 2, Street = "Street 2", PostalCode = "123456789", City = new City() { Id = 2, CityName = "City2" } },
-                    Destiny = new Address() { Id = 2, Street = "Street 2", PostalCode = "123456789", City = new City() { Id = 2, CityName = "City2" } }
+                    Client = new Client() { Id = 4, Name = "nana", Phone = "999", Address = new Address() { Id = 4, Street = "rua2", Number = 2, Neighborhood = "bairro2", PostalCode = "14820428", City = new City() { Id = 4, CityName = "City2" } } },
+                    Origin = new Address() { Id = 5, Street = "Street 2", PostalCode = "123456789", City = new City() { Id = 5, CityName = "City2" } },
+                    Destiny = new Address() { Id = 6, Street = "Street 2", PostalCode = "123456789", City = new City() { Id = 6, CityName = "City2" } }
                 });
                 context.Airfare.Add(new Airfare
                 {
                     Id = 3,
                     Price = 1400,
-                    Client = new Client() { Id = 3, Name = "nana", Phone = "999", Address = new Address() { Id = 3, Street = "rua1", Number = 3, Neighborhood = "bairro3", PostalCode = "14820428", City = new City() { Id = 3, CityName = "City3" } } },
-                    Origin = new Address() { Id = 3, Street = "Street 3", PostalCode = "123456789", City = new City() { Id = 3, CityName = "City3" } },
-                    Destiny = new Address() { Id = 3, Street = "Street 3", PostalCode = "123456789", City = new City() { Id = 3, CityName = "City3" } }
+                    Client = new Client() { Id = 7, Name = "nana", Phone = "999", Address = new Address() { Id = 7, Street = "rua1", Number = 3, Neighborhood = "bairro3", PostalCode = "14820428", City = new City() { Id = 7, CityName = "City3" } } },
+                    Origin = new Address() { Id = 8, Street = "Street 3", PostalCode = "123456789", City = new City() { Id = 8, CityName = "City3" } },
+                    Destiny = new Address() { Id = 9, Street = "Street 3", PostalCode = "123456789", City = new City() { Id = 9, CityName = "City3" } }
                 });
                 context.SaveChanges();
             }
@@ -86,9 +84,9 @@ namespace AndreTurismoApp.UTest
             {
                 Id = 4,
                 Price = 1400,
-                Client = new Client() { Id = 4, Name = "nana", Phone = "999", Address = new Address() { Id = 4, Street = "rua1", Number = 4, Neighborhood = "bairro1", PostalCode = "14820428", City = new City() { Id = 4, CityName = "City4" } } },
-                Origin = new() { Id = 4, Street = "Street 4", PostalCode = "123456789", City = new City() { Id = 4, CityName = "City4" } },
-                Destiny = new() { Id = 4, Street = "Street 4", PostalCode = "123456789", City = new City() { Id = 4, CityName = "City4" }, }
+                Client = new Client() { Id = 10, Name = "nana", Phone = "999", Address = new Address() { Id = 13, Street = "rua1", Number = 4, Neighborhood = "bairro1", PostalCode = "14820428", City = new City() { Id = 15, CityName = "City4" } } },
+                Origin = new() { Id = 11, Street = "Street 4", PostalCode = "14820428", City = new City() { Id = 16, CityName = "City4" } },
+                Destiny = new() { Id = 12, Street = "Street 4", PostalCode = "14820428", City = new City() { Id = 17, CityName = "City4" }, }
 
             };
             // Use a clean instance of the context to run the test

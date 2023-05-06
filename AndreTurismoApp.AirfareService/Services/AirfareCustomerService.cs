@@ -11,7 +11,6 @@ namespace AndreTurismoApp.AirfareService.Services
             try
             {
                 HttpResponseMessage response = await AirfareCustomerService.client.GetAsync("https://localhost:7262/api/Clients/" + id);
-                response.EnsureSuccessStatusCode();
                 string ender = await response.Content.ReadAsStringAsync();
                 var end = JsonSerializer.Deserialize<Client>(ender);
                 return end;

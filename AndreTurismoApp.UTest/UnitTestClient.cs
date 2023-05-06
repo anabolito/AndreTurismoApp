@@ -60,19 +60,19 @@ namespace AndreTurismoApp.UTest
             InitializeDataBase();
             Client customer = new Client()
             {
-                Id = 4,
+                Id = 6,
                 Name = "nono",
                 Phone = "666",
-                Address = new Address()
+                Address = new()
                 {
-                    Id = 10,
+                    Id = 6,
                     Street = "rua4",
                     Number = 3,
                     Neighborhood = "bairro4",
                     PostalCode = "14820428",
                     City = new City()
                     {
-                        Id = 10,
+                        Id = 6,
                         CityName = "City4"
                     }
                 }
@@ -82,7 +82,7 @@ namespace AndreTurismoApp.UTest
             {
                 ClientsController clientController = new ClientsController(context);
                 Client cl = clientController.PostClient(customer).Result.Value;
-                Assert.Equal(4, cl.Id);
+                Assert.Equal(6, cl.Id);
             }
         }
         [Fact]

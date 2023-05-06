@@ -54,21 +54,20 @@ namespace AndreTurismoApp.UTest
                         },
                         Origin = new Address()
                         {
-                            Id = 1,
+                            Id = 2,
                             Street = "Street 1",
                             PostalCode = "123456789",
                             City = new City()
                             {
-                                Id = 1,
-                                CityName = "City1"
+                                Id = 2, CityName = "City1"
                             }
                         },
                         Destiny = new Address()
                         {
-                            Id = 2,
+                            Id = 3,
                             Street = "Street 1",
                             PostalCode = "123456789",
-                            City = new City() { Id = 1, CityName = "City1" },
+                            City = new City() { Id = 3, CityName = "City1" },
                         }
                     },
                     Client = new Client
@@ -78,14 +77,14 @@ namespace AndreTurismoApp.UTest
                         Phone = "999",
                         Address = new Address()
                         {
-                            Id = 1,
+                            Id = 4,
                             Street = "rua1",
                             Number = 1,
                             Neighborhood = "bairro1",
                             PostalCode = "14820428",
                             City = new City()
                             {
-                                Id = 1,
+                                Id = 4,
                                 CityName = "City1"
                             }
                         }
@@ -97,14 +96,14 @@ namespace AndreTurismoApp.UTest
                         DailyPrice = 400,
                         HotelAddress = new Address()
                         {
-                            Id = 1,
+                            Id = 5,
                             Street = "rua1",
                             Number = 1,
                             Neighborhood = "bairro1",
                             PostalCode = "14820428",
                             City = new City()
                             {
-                                Id = 1,
+                                Id = 5,
                                 CityName = "City1"
                             }
                         }
@@ -125,35 +124,35 @@ namespace AndreTurismoApp.UTest
                             Phone = "999",
                             Address = new Address()
                             {
-                                Id = 2,
+                                Id = 10,
                                 Street = "rua1",
                                 Number = 1,
                                 Neighborhood = "bairro1",
                                 PostalCode = "14820428",
                                 City = new City()
                                 {
-                                    Id = 2,
+                                    Id = 10,
                                     CityName = "City1"
                                 }
                             }
                         },
                         Origin = new Address()
                         {
-                            Id = 2,
+                            Id = 11,
                             Street = "Street 1",
                             PostalCode = "123456789",
                             City = new City()
                             {
-                                Id = 2,
+                                Id = 11,
                                 CityName = "City1"
                             }
                         },
                         Destiny = new Address()
                         {
-                            Id = 2,
+                            Id = 12,
                             Street = "Street 1",
                             PostalCode = "123456789",
-                            City = new City() { Id = 2, CityName = "City1" },
+                            City = new City() { Id = 12, CityName = "City1" },
                         }
                     },
                     Client = new Client
@@ -163,14 +162,14 @@ namespace AndreTurismoApp.UTest
                         Phone = "999",
                         Address = new Address()
                         {
-                            Id = 2,
+                            Id = 13,
                             Street = "rua1",
                             Number = 1,
                             Neighborhood = "bairro1",
                             PostalCode = "14820428",
                             City = new City()
                             {
-                                Id = 2,
+                                Id = 13,
                                 CityName = "City1"
                             }
                         }
@@ -182,14 +181,14 @@ namespace AndreTurismoApp.UTest
                         DailyPrice = 400,
                         HotelAddress = new Address()
                         {
-                            Id = 2,
+                            Id = 14,
                             Street = "rua1",
                             Number = 1,
                             Neighborhood = "bairro1",
                             PostalCode = "14820428",
                             City = new City()
                             {
-                                Id = 2,
+                                Id = 14,
                                 CityName = "City1"
                             }
                         }
@@ -224,21 +223,21 @@ namespace AndreTurismoApp.UTest
                         },
                         Origin = new Address()
                         {
-                            Id = 3,
+                            Id = 15,
                             Street = "Street 1",
                             PostalCode = "123456789",
                             City = new City()
                             {
-                                Id = 3,
+                                Id = 15,
                                 CityName = "City1"
                             }
                         },
                         Destiny = new Address()
                         {
-                            Id = 3,
+                            Id = 16,
                             Street = "Street 1",
                             PostalCode = "123456789",
-                            City = new City() { Id = 3, CityName = "City1" },
+                            City = new City() { Id = 16, CityName = "City1" },
                         }
                     },
                     Client = new Client
@@ -248,14 +247,14 @@ namespace AndreTurismoApp.UTest
                         Phone = "999",
                         Address = new Address()
                         {
-                            Id = 3,
+                            Id = 17,
                             Street = "rua1",
                             Number = 1,
                             Neighborhood = "bairro1",
                             PostalCode = "14820428",
                             City = new City()
                             {
-                                Id = 3,
+                                Id = 17,
                                 CityName = "City1"
                             }
                         }
@@ -267,14 +266,14 @@ namespace AndreTurismoApp.UTest
                         DailyPrice = 400,
                         HotelAddress = new Address()
                         {
-                            Id = 3,
+                            Id = 18,
                             Street = "rua1",
                             Number = 1,
                             Neighborhood = "bairro1",
                             PostalCode = "14820428",
                             City = new City()
                             {
-                                Id = 3,
+                                Id = 18,
                                 CityName = "City1"
                             }
                         }
